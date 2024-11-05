@@ -53,7 +53,7 @@ def login():
     users_password = data["password"]
     
     existing_user = User.query.filter_by(email=users_email).first()
-    if existing_user and existing_user.check_password(users_email):
+    if existing_user and existing_user.check_password(users_password):
         access_token = create_access_token(identity=existing_user.id)
         return jsonify(access_token=access_token), 200
     
@@ -65,4 +65,35 @@ def login():
 @app.route("/api/profile", methods=['GET'])
 @jwt_required()
 def profile():
-    pass
+    current_user = User.query.get(get_jwt_identity())
+    
+    if current_user:
+        current_user_data = {
+            "id": current_user.id,
+            "email": current_user.email,
+            "nickname": current_user.nickname,
+            "is_teacher": current_user.is_teacher,
+            "visited_tasks": current_user.visited_tasks,
+            "created_tasks": current_user.created_tasks
+        }
+        return jsonify(current_user_data), 200
+    else:
+        bad_response = {
+        "message": "Invalid data!"
+        }
+        return jsonify(bad_response), 400
+    
+@app.route("/api/profile/changeNickname", methods=['POST'])
+@jwt_required()
+def change_nickname():
+    current_user = User.query.get(get_jwt_identity())
+    new_nickname = request.get_json()['nickname']
+    
+    if current_user:
+        current_user.nickname = new_nickname
+        return jsonify({"message": "The nickname successfully changed!"}), 200
+    else:
+        bad_response = {
+        "message": "Error occurs while changing the nickname!"
+        }
+        return jsonify(bad_response), 400
