@@ -1,0 +1,25 @@
+@font-face {
+    font-family: Medium;
+    src: url(../public/fonts/TTOctosquares-Medium.ttf);
+}
+@font-face {
+    font-family: Bold;
+    src: url(../public/fonts/TTOctosquares-Bold.ttf);
+}
+@font-face {
+    font-family: Light;
+    src: url(../public/fonts/TTOctosquares-Light.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 16px;
+}
+body {
+    width: 100%;
+    transition: all 0.2 ease;
+}

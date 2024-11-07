@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
@@ -7,8 +7,8 @@ from models import db, students_tasks, Task, User
 
 
 app = Flask(__name__)
-db.init_app(app)
 app.config.from_object(Config)
+db.init_app(app)
 CORS(app)
 jwt = JWTManager(app)
 
@@ -26,16 +26,15 @@ def registration():
     
     if existing_user:
             return jsonify({
-                "message": f"""
-                User with email: {users_email} are existing.
-                Please try another email!
-                """
-                }), 400
+                "message": f"User with email: {users_email} are existing. Please try another email!"
+                }), 404
             
     new_user = User(email=users_email)
     new_user.set_password(users_password)
     db.session.add(new_user)
     db.session.commit()
+    
+    print(str(new_user.email) + " " + str(new_user.password_hash))
         
     return jsonify({
         "message": "Successfully added new user!",
@@ -58,7 +57,7 @@ def login():
         return jsonify(access_token=access_token), 200
     
     bad_response = {
-        "message": "Invalid email or password!"
+        "msg": "Invalid email or password!"
     }
     return jsonify(bad_response), 400
 
@@ -78,10 +77,7 @@ def profile():
         }
         return jsonify(current_user_data), 200
     else:
-        bad_response = {
-        "message": "Invalid data!"
-        }
-        return jsonify(bad_response), 400
+        return redirect("htpp://localhost:3000/"), 300
     
 @app.route("/api/profile/changeNickname", methods=['POST'])
 @jwt_required()
@@ -97,3 +93,6 @@ def change_nickname():
         "message": "Error occurs while changing the nickname!"
         }
         return jsonify(bad_response), 400
+    
+if __name__ == "__main__":
+    app.run(debug=True)

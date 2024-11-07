@@ -14,7 +14,7 @@ class User(db.Model):
     __tablename__ = "users"
     
     id = db.Column(db.Integer, primary_key = True)
-    email = db.Column(db.String(100), nullable = False, uniqe = True)
+    email = db.Column(db.String(100), nullable=False, unique=True)
     nickname = db.Column(db.String(150))
     password_hash = db.Column(db.String(150), nullable = False)
     is_teacher = db.Column(db.Boolean, default = False)
