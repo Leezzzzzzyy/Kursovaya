@@ -31,13 +31,14 @@ class User(db.Model):
         self.password_hash = generate_password_hash(password)
         
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)   
+        return check_password_hash(self.password_hash, password)
     
 class Task(db.Model):
     __tablename__ = 'tasks'
     
     id = db.Column(db.Integer, primary_key = True)
-    description = db.Column(db.String(500), nullable = False)
+    title = db.Column(db.String(200), nullable = False)
+    description = db.Column(db.String(1000), nullable = False)
     correct_answer = db.Column(db.String(100), nullable = False)
     
     created_user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)

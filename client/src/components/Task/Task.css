@@ -1,0 +1,56 @@
+:root {
+    --main-velvet-color: #6747e8;
+}
+.task-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: white;
+    border: 3px solid var(--main-velvet-color);
+    border-radius: 23px;
+    width: 85vw;
+    height: 80vh;
+    padding: 35px 70px;
+    margin-top: 3.5vh;
+}
+.task-input {
+    font-size: 24px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 16px;
+    font-family: Medium;
+}
+.task-input:focus {
+    outline: none;
+}
+#name-input {
+    display: block;
+    width: 60%;
+}
+#description-input {
+    resize: vertical;
+    width: 100%;
+    max-height: 440px;
+}
+.container-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.container-row > button {
+    font-size: 24px;
+    color: white;
+    background-color: var(--main-velvet-color);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    width: 400px;
+    padding: 16px 0;
+    cursor: pointer;
+    font-family: Medium;
+    transition: all 0.5s ease;
+}
+.container-row > button:hover {
+    background-color: black;
+}

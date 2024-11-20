@@ -1,0 +1,213 @@
+:root {
+    --main-velvet-color: #6747e8;
+}
+.profile-container {
+    background-color: var(--main-velvet-color);
+    border-radius: 23px;
+    width: 85vw;
+    height: 80vh;
+    padding: 35px 70px;
+    margin-top: 3.5vh;
+    display: flex;
+}
+.user-container {
+    width: 35vw;
+    height: 100%;
+    background-color: white;
+    border-radius: 23px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.user-container > h1 {
+    font-size: 40px;
+    margin-top: 40px;
+    position: relative;
+}
+.user-container > h1::after, .user-container > h1::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 2px;
+    border-color: transparent;
+}
+.user-container > h1::after {
+    top: 5px;
+    right: -8px;
+    border-right-color: var(--main-velvet-color);
+    border-top-color: var(--main-velvet-color);
+}
+.user-container > h1::before {
+    bottom: 5px;
+    left: -8px;
+    border-bottom-color: var(--main-velvet-color);
+    border-left-color: var(--main-velvet-color);
+}
+.user-data {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user-data > img {
+    width: 240px;
+    height: 240px;
+}
+.user-data-info {
+    width: 60%;
+}
+.user-data-info > ul {
+    list-style: none;
+    width: 100%;
+}
+.user-data-info > ul > li {
+    display: flex;
+    align-items: center;
+}
+.user-info-title {
+    width: 30%;
+    font-weight: bold;
+}
+.user-info-tilda {
+    color: var(--main-velvet-color);
+    font-size: 25px;
+}
+.user-info-data {
+    margin-left: 30px;
+}
+#edit-button {
+    position: absolute;
+    bottom: 40px;
+    font-size: 20px;
+    padding: 10px 80px;
+    color: white;
+    background-color: var(--main-velvet-color);
+    width: 60%;
+    border: none;
+    border-radius: 23px;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    font-family: Medium;
+}
+#edit-button:hover {
+    background-color: black;
+}
+.user-tasks-container {
+    padding-left: 5%;
+    position: relative;
+    width: 50vw;
+    height: 100%;
+}
+.user-tasks-bar {
+    width: 100%;
+    background-color: white;
+    border-radius: 15px;
+}
+#edit-caption {
+    padding: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+#changeBlock {
+    display: flex;
+    justify-content: space-around;
+}
+.user-task-bar-stat, .user-task-bar-success {
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+    font-family: Medium;
+    padding: 20px;
+    cursor: pointer;
+}
+.selected {
+    color: #3d2797;
+    cursor: default;
+}
+.user-tasks-statistic {
+    margin-top: 60px;
+    position: relative;
+}
+#task-emerald {
+    width: 30px;
+    height: 30px;
+}
+.user-task-statistic-element {
+    display: flex;
+    width: inherit;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 60px;
+}
+.first-stat {
+    width: 70%;
+}
+.user-task-tilda {
+    font-size: 32px;
+    font-weight: bold;
+}
+#completed-tasks {
+    display: flex;
+    align-items: center;
+}
+.last-stat {
+    width: 30%;
+    text-align: center;
+}
+.user-tasks-list {
+    display: none;
+}
+.edit-container {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+    margin-top: 140px;
+}
+.edit-container > p {
+    font-size: 28px;
+    color: white;
+    font-family: Medium;
+    width: 30%;
+}
+.edit-container > input {
+    border: none;
+    background-color: white;
+    width: 70%;
+    font-size: 20px;
+    padding: 16px;
+    border-radius: 16px;
+}
+.edit-container > input:focus {
+    outline: none;
+}
+.down-button {
+    color: #1b0380;
+    background-color: #d8d1f5;
+    font-size: 20px;
+    padding: 8px 0;
+    width: 350px;
+    text-align: center;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+    font-family: Medium;
+    transition: all 0.5s ease;
+}
+.down-button:hover {
+    background-color: black;
+    color: white;
+}
+#teacher-button, #create-task-button {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -150px;
+}
+

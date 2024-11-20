@@ -8,4 +8,3 @@ class Config:
     SECRET_KEY = 'your_secret_key'
     JWT_SECRET_KEY = 'secretiki'
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
-    

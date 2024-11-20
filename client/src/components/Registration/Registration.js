@@ -1,15 +1,30 @@
 import React, {useRef, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import './Registration.css'
+import '../../index.css'
+import '../backgrounds.css'
 
 const Registration = () => {
+    useEffect(() => {
+        document.body.classList.add("registration-background")
+
+        return () => {
+            document.body.classList.remove("registration-background")
+        }
+    }, [])
+    
     const navigate = useNavigate()
 
     const goToNews = () => {
         navigate('/news')
     }
     const goToLogin = () => {
-        navigate('/login')
+        if (localStorage.getItem("jwt_token")) {
+            navigate('/profile')
+        } else {
+            navigate('/login')
+        }
     }
     const goToTasks = () => {
         navigate('/tasks')
@@ -30,6 +45,7 @@ const Registration = () => {
             }
         ).then(response => {
             console.log(response)
+            navigate(response.data.redirect_url)
         }).catch(error => {
             console.error(error)
         })
@@ -55,9 +71,9 @@ const Registration = () => {
         <main>
             <div className="main-form-wrapper">
                 <form onSubmit={registration}>
-                    <label>
+                    <div className="form-caption">
                         Регистрация
-                    </label>
+                    </div>
                     <input
                         className="form-input"
                         type="email"

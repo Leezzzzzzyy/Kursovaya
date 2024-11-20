@@ -1,0 +1,74 @@
+#all-tasks-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 80px;
+    width: 85%;
+    height: max-content;    
+}
+.task-list-element {
+    position: relative;
+    width: 45%;
+    height: 35vh;
+    margin-bottom: 2.5vh;
+    color: white;
+    padding: 25px;
+    border-radius: 7px;
+    border: 3px solid transparent;
+    transition: border 0.5s ease;
+}
+.task-list-element:hover {
+    border: 3px solid #1B0380;
+}
+.task-container-top-content {
+    display: flex;
+    gap: 30px;
+}
+.top-content-left {
+    display: flex;
+    justify-content: center;
+    padding: 25px 15px;
+    font-size: 24px;
+    border: 3px solid white;
+}
+.top-content-right {
+    position: relative;
+}
+.top-content-right > h1 {
+    font-size: 28px;
+    font-weight: bold;
+}
+.top-content-right > p {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    padding: 2px 5px;
+    border: 1.5px solid white;
+    border-radius: 7px;
+    width: fit-content;
+    font-family: Light;
+}
+.task-container-bottom {
+    position: relative;
+    margin-top: 15px;
+    max-height: 100px;
+}
+.task-container-bottom > h3 {
+    font-family: Light;
+}
+.task-list-element > button {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    font-family: Bold;
+    color: white;
+    border: 1px solid white;
+    padding: 5px 25px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+.task-list-element > button:hover {
+    background-color: white;
+    color: black;
+}

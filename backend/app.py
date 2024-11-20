@@ -67,13 +67,35 @@ def profile():
     current_user = User.query.get(get_jwt_identity())
     
     if current_user:
+        
+        visited_tasks_objects_array = current_user.visited_tasks
+        created_tasks_objects_array = current_user.created_tasks
+        
+        visited_tasks_dicts_array = list()
+        created_tasks_dicts_array = list()
+
+        for task in visited_tasks_objects_array:
+            new_dict = {
+                "task_id": task.id,
+                "title": task.title,
+                "is_completed": None
+            }
+            visited_tasks_dicts_array.append(new_dict)
+            
+        for task in created_tasks_objects_array:
+            new_dict = {
+                "task_id": task.id,
+                "title": task.title
+            }
+            created_tasks_dicts_array.append(new_dict)
+            
         current_user_data = {
             "id": current_user.id,
             "email": current_user.email,
             "nickname": current_user.nickname,
             "is_teacher": current_user.is_teacher,
-            "visited_tasks": current_user.visited_tasks,
-            "created_tasks": current_user.created_tasks
+            "visited_tasks": visited_tasks_dicts_array,
+            "created_tasks": created_tasks_dicts_array
         }
         return jsonify(current_user_data), 200
     else:
@@ -87,12 +109,95 @@ def change_nickname():
     
     if current_user:
         current_user.nickname = new_nickname
+        db.session.commit()
+        print(current_user.nickname)
         return jsonify({"message": "The nickname successfully changed!"}), 200
     else:
         bad_response = {
         "message": "Error occurs while changing the nickname!"
         }
         return jsonify(bad_response), 400
+
+@app.route("/api/profile/create_task", methods=["POST"])
+@jwt_required()
+def create_task():
+    current_user = User.query.get(get_jwt_identity())
+    is_teacher = current_user.is_teacher
+    
+    if is_teacher:
+        task_data = request.get_json()
+        task_title = task_data['title']
+        task_description = task_data['description']
+        correct_answer = task_data['correct_answer']
+        
+        if task_description and correct_answer:
+            new_task = Task(description=task_description, title=task_title, correct_answer=correct_answer)
+            current_user.created_tasks.append(new_task)
+            new_task.created_user_id = current_user.id
+            
+            print(new_task)
+            
+            db.session.add(new_task)
+            db.session.commit()
+            
+            success_response = {
+                "msg": "Successfully created new task!",
+                "task_data": {
+                    "created_user_id": current_user.id,
+                    "title": new_task.title,
+                    "description": new_task.description,
+                    "correct_answer": new_task.correct_answer
+                }
+            }
+            return jsonify(success_response)
+        else:
+            bad_response = {
+                "msg": "Missing data!"
+            }
+            return jsonify(bad_response)
+
+    else:
+        bad_response = {
+            "msg": "Current user aren't teacher. Need to update status!"
+        }
+        return jsonify(bad_response)
+
+@app.route("/api/profile/become_a_teacher", methods=["POST"])
+@jwt_required()
+def changeStatus():
+    current_user = User.query.get(get_jwt_identity())
+    change = request.get_json()['change']
+    if change:
+        current_user.is_teacher = True
+    else:
+        current_user.is_teacher = False
+    
+    db.session.commit()
+    
+    return jsonify({"msg": "Status changed successfully."})
+
+@app.route("/api/get_all_tasks", methods=["GET"])
+def return_all_tasks():
+    tasks_objects_list = Task.query.all()
+    tasks_dicts_list = []
+    
+    for task in tasks_objects_list:
+        creator = User.query.get(task.created_user_id)
+        creator_name = creator.nickname
+        
+        task_description = task.description[:100]
+        new_dict = {
+            "task_id": task.id,
+            "task_title": task.title,
+            "task_mini_description": task_description,
+            "creator_name": creator_name
+        }
+        tasks_dicts_list.append(new_dict)
+        
+    return jsonify({
+        "message": "Tasks uploaded successfully!",
+        "all_tasks": tasks_dicts_list
+    }), 200
     
 if __name__ == "__main__":
     app.run(debug=True)

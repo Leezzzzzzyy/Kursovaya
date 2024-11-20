@@ -1,8 +1,17 @@
 import React, {useRef, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import "../backgrounds.css"
 
 const Login = () => {
+    useEffect(() => {
+        document.body.classList.add("login-background")
+
+        return () => {
+            document.body.classList.remove("login-background")
+        }
+    }, [])
+
     const navigate = useNavigate()
 
     const goToNews = () => {
@@ -29,7 +38,7 @@ const Login = () => {
                 password: password
             }
         ).then(response => {
-            console.log(response)
+            // console.log(response)
             localStorage.setItem("jwt_token", response.data.access_token)
             navigate('/profile')
         }).catch(error => {
@@ -57,9 +66,9 @@ const Login = () => {
         <main>
             <div className="main-form-wrapper">
                 <form onSubmit={login}>
-                    <label>
+                    <div className="form-caption">
                         Вход
-                    </label>
+                    </div>
                     <input
                         className="form-input"
                         type="email"
@@ -74,7 +83,7 @@ const Login = () => {
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                     />
-                    <button type="submit">Войти в Личный Кабинет</button>
+                    <button type="submit">Войти в ЛK</button>
                 </form>
             </div>
         </main>
