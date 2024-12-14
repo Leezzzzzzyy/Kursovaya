@@ -45,7 +45,7 @@ const Tasks = () => {
     }, [])
 
     const goToTask = (taskID) => {
-        return 
+        navigate(`/task/${taskID}`)
     }
 
     return (
@@ -96,7 +96,7 @@ const Tasks = () => {
                                 <div className="task-container-bottom">
                                     <h3>{task.task_mini_description}...</h3>
                                 </div>
-                                <button onClick={goToTask(task.id)}>Начать</button>
+                                <button onClick={() => goToTask(task.task_id)}>Начать</button>
                             </div>
                         )
                     })}

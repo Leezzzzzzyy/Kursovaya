@@ -5,6 +5,38 @@ import "../../index.css";
 import "../backgrounds.css";
 import "./Profile.css";
 
+const VisitedTasks = ({ taskArray }) => {
+    const navigate = useNavigate()
+
+    const goToTask = (task_id) => {
+        navigate(`/task/${task_id}`)
+    }
+
+    return (
+        <div className="tasks-array-container">
+            {taskArray.map(task => {
+                let borderColor = ""
+                if (task.is_completed) {
+                    borderColor = "greenyellow"
+                } else {
+                    borderColor = "red"
+                }
+
+                return (
+                    <div className="task-array-item" key={task.task_id} style={{
+                        border: `4px solid ${borderColor}`
+                    }}>
+                        <span><img id="task-array-emerald" src="./media/images/3D Image - 35emeraldIcon.png" /></span>
+                        <p className="task-item-title">{task.title}</p>
+                        <p className="task-item-id">{`ID: ${task.task_id}`}</p>
+                        <button onClick={() => goToTask(task.task_id)}>Перейти</button>
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
+
 const Profile = () => {
     useEffect(() => {
         document.body.classList.add("profile-background")
@@ -29,7 +61,7 @@ const Profile = () => {
     const goToHome = () => {
         navigate('/')
     }
-    const goToTask = () => {
+    const goToCreateTask = () => {
         navigate('/task')
     }
 
@@ -41,6 +73,18 @@ const Profile = () => {
         visitedTasks: [],
         createdTasks: []
     })
+
+    const [correctTasks, setCorrectTasks] = useState(0)
+    const getAmountOfCorrectTasks = () => {
+        let result = 0
+        userData.visitedTasks.forEach((task) => {
+            if (task.is_completed) {
+                result += 1
+                console.log("+1")
+            }
+        })
+        return setCorrectTasks(result)
+    }
 
     useEffect(() => {
         axios.get("http://localhost:5000/api/profile", {
@@ -58,6 +102,7 @@ const Profile = () => {
                 createdTasks: response.data.created_tasks
             })
             console.log(userData)
+            getAmountOfCorrectTasks()
         }).catch(error => {
             console.error(error)
         })
@@ -231,7 +276,7 @@ const Profile = () => {
                             <span><img id="task-emerald" src="./media/images/3D Image - 35emeraldIcon.png" /></span>
                             </div>
                             <p className="user-task-tilda">~</p>
-                            <p className="last-stat">Заглушка :О</p>
+                            <p className="last-stat">{correctTasks}</p>
                         </div>
                         {userData.isTeacher && 
                         <div className="user-task-statistic-element">
@@ -242,11 +287,11 @@ const Profile = () => {
                         }
 
                         {userData.isTeacher == false && <button className="down-button" id="teacher-button" onClick={changeStatus}>Стать учителем</button>}
-                        {userData.isTeacher && <button className="down-button" id="create-task-button" onClick={goToTask}>Создать задание</button>}
+                        {userData.isTeacher && <button className="down-button" id="create-task-button" onClick={goToCreateTask}>Создать задание</button>}
                     </div>
                     
                     <div className="user-tasks-list">
-                        Гойда
+                        <VisitedTasks taskArray={userData.visitedTasks}/>
                     </div>
 
                     <div className="edit-container">

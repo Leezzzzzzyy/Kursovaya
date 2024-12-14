@@ -33,6 +33,7 @@
 }
 .top-content-right {
     position: relative;
+    min-width: 40%;
 }
 .top-content-right > h1 {
     font-size: 28px;

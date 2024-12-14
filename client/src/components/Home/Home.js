@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import './Home.css'
 import '../../index.css'
 import '../backgrounds.css'
-import axios from "axios";
 
 
 const Home = () => {

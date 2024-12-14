@@ -1,0 +1,60 @@
+:root {
+    --main-velvet-color: #6747e8;
+    --caption-color: #1B0380;
+}
+header {
+    font-family: Medium;
+}
+#taskID-container {
+    position: relative;
+    width: 85vw;
+    height: 80vh;
+    margin-top: 3.5vh;
+    border: 3px solid var(--main-velvet-color);
+    border-radius: 23px;
+    padding: 30px 60px;
+}
+#taskID-container > p{
+    font-size: 18px;
+    font-family: Bold;
+    margin-top: 20px;
+}
+#taskID-caption {
+    font-family: Medium;
+    color: var(--caption-color);
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+#taskID-description {
+    font-family: Medium;
+    color: var(--caption-color);
+    font-size: 28px;
+    font-family: Light;
+}
+#code-container-wrapper {
+    border: 2px solid black;
+    width: 70%;
+}
+.cm-editor:focus {
+    outline: none;
+    border: none;
+}
+.cm-editor {
+    height: 300px;
+}
+#send-button {
+    font-family: Medium;
+    position: absolute;
+    bottom: 40px;
+    font-size: 24px;
+    padding: 5px 15px;
+    border: none;
+    background-color: var(--main-velvet-color);
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+#send-button:hover {
+    background-color: black;
+}

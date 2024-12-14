@@ -7,6 +7,7 @@ import Login from './Login/Login.js';
 import Profile from './Profile/Profile.js';
 import Tasks from './Tasks/Tasks.js';
 import Task from './Task/Task.js';
+import TaskID from './TaskID/TaskID.js';
 import News from './News/News.js';
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/task" element={<Task />} />
+        <Route path="/task/:id" element={<TaskID />} />
         <Route path="/news" element={<News />} />
       </Routes>
     </Router>

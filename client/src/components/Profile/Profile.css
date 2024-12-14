@@ -210,4 +210,33 @@
     transform: translateX(-50%);
     bottom: -150px;
 }
-
+.tasks-array-container {
+    margin-top: 3vh;
+}
+.task-array-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 75px;
+    background-color: white;
+    border-radius: 16px;
+    padding: 0 24px;
+    margin-bottom: 3vh;
+    font-size: 18px;
+}
+.task-array-item > button {
+    width: 150px;
+    height: 45px;
+    border: none;
+    background-color: #d0c8f5;
+    color: #1b0380;
+    border-radius: 24px;
+    font-family: Medium;
+    font-size: 18px;
+    transition: all 0.5s ease;
+}
+.task-array-item > button:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
